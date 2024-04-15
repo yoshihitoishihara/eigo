@@ -1,0 +1,25 @@
+<div class="post-container">    
+    <h1>動画</h1>
+    <h2>編集</h2>
+    <%= form_for @video do |f| %>
+        <div class='form-group'>
+            <%= f.collection_check_boxes(:check_ids, Check.all, :id, :name) do |check| %>
+                <div class='form-check'>
+                    <%= check.label class: 'form-check-label' do %>
+                        <%= check.check_box class: 'form-check-input' %>
+                        <%= check.text %>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+        <div class="field">
+            <%= f.label :body %>
+            <%= f.text_field :body, :size => 140 %>
+            <%= f.label :youtubr_url %>
+            <%= f.text_field :youtube_url %>
+        </div>
+        <%= f.submit "投稿する" %>
+    <% end %>
+
+    <p class="btn-square-soft"><%= link_to '元の一覧へ戻る', videos_path %></p>
+</div>

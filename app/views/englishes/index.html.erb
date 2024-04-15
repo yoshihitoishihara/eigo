@@ -1,0 +1,64 @@
+<div class="all-english">  
+  <header>
+    <div class="header-list">
+      <ul>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <li>  
+          <% if user_signed_in? %>
+              <%= link_to "マイページへ", user_path(current_user.id) %>
+          <% end %>
+        </li>  
+        <li><%= link_to "動画一覧へ", videos_path %></li>
+      </ul>
+    </div>
+  </header>
+  <div class="tweets-container">
+    <h1>参考書</h1>
+    <h3>投稿を検索</h3>
+    <%= form_tag({controller:"englishes",action:"index"}, method: :get) do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag '検索する'  %>
+    <% end %>
+    <%= form_tag({controller:"englishes",action:"index"}, method: :get) do %>
+      <% Tag.all.each do |t| %>
+        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+      <% end %>
+      <%= submit_tag '検索する'  %>
+    <% end %>
+    <p class="btn-square-soft"><%= link_to "元の一覧へ戻る", englishes_path %></p>
+    <p class="btn-square-slant"><%= link_to "新規投稿へ", new_english_path %></p>
+    <div class="tweet">
+      <% @englishes.each do |t| %>
+        <div class="main-box">
+          <div class="bg-box">
+            <div class="left-container">
+              <p><%= t.user.email %></p>
+              <p><%= image_tag t.image_url, size: "200x150" if t.image? %></p>
+              <p><%= t.body %></p>
+              <p class="time"><%= t.created_at %></p>
+            </div>
+            <div class="right-container">
+              <% if user_signed_in? %>
+                <% if current_user.already_liked?(t) %>
+                    <%= link_to english_like_path(id: t.id, english_id: t.id), method: :delete do %>
+                      <p><i class="fas fa-heart"></i><%= t.likes.count %></p>
+                    <% end %>
+                <% else %>
+                    <%= link_to english_likes_path(id: t.id, english_id: t.id), method: :post do %>
+                      <p><i class="fas fa-heart"></i><%= t.likes.count %></p>
+                    <% end %>
+                <% end %>
+              <% else %>
+                <i class="fas fa-heart"></i><%= t.likes.count %>
+              <% end %>
+            
+              <p class="btn-gradient-3d-orange"><%= link_to "詳細へ", english_path(t.id) %></p>
+              <p class="btn-gradient-3d-brown"><%= link_to "編集する", edit_english_path(t.id) %></p>
+              <p><%= button_to "削除する", english_path(t.id), method: :delete %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

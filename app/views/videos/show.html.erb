@@ -1,0 +1,63 @@
+<div class="post-container"> 
+  <p id="notice"><%= notice %></p>
+  <p>
+    <strong>Body:</strong>
+    <iframe width="100" height="100" src="https://www.youtube.com/embed/<%= @video.youtube_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </p>
+
+  <% @video.checks.each do |check| %>
+    <span><%= check.name %></span>
+  <% end %>
+
+  <p>
+    <%= @video.body %>
+  <p>
+    <strong>Youtube url:</strong>
+    <%= @video.youtube_url %>
+  </p>
+      <% if user_signed_in? %>
+        <% if current_user.already_like2d?(@video) %>
+          <%= link_to video_like2_path(@video), method: :delete do %>
+            <i class="fas fa-heart"></i><%= @video.like2s.count %>
+          <% end %>
+        <% else %>
+          <%= link_to video_like2s_path(@video), method: :post do %>
+            <i class="fas fa-heart"></i><%= @video.like2s.count %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <i class="fas fa-heart"></i><%= @video.like2s.count %>
+      <% end %>
+
+  <h2>いいねしたユーザー</h2>
+  <% @video.like2d_users.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+
+  <p class="btn-gradient-3d-brown"><%= link_to '編集する', edit_video_path(@video) %></p> 
+  <div class="reply-wrapper">
+    <p>コメント一覧</p>
+    <% @video.checks.each do |check| %>
+      <span><%= check.name %></span>
+  <% end %>
+    <% @replies.each do |r| %>
+      <div>
+        <%= r.user.email unless r.user.blank? %>
+        <br>
+        <%= r.content %>
+      </div>
+        <br>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= form_with(model: [@video, @reply], local: true) do |video| %>
+        <%= video.text_area :content %>
+        <%= button_tag type: "submit" do %>
+          <i class="far fa-replies"></i> コメントする
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <p class="btn-square-soft"><%= link_to '元の一覧へ戻る', videos_path %></p>
+</div>

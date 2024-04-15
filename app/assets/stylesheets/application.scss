@@ -1,0 +1,195 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ body {
+    margin: 0;
+    padding: 0;
+ } 
+ 
+ header {
+  background-color: #951c1cc4;
+  height: 80px;
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  position: fixed;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+ }
+.header-list {
+   display: flex;
+   align-items: center;
+ }
+ header ul {
+   display: flex;
+ }
+ header li {
+   list-style: none;
+   margin-right: 40px;
+ }
+ .tweets-container {
+   padding-left: 40px;
+   margin: 80px auto auto auto;
+ }
+ .tweet{
+  display: flex;
+  flex-flow: row wrap;
+  padding: 20px 20px 20px 20px;
+ }
+ .main-box {
+   width: 20%;
+   padding: 20px 20px 20px 80px; 
+ }
+ @media screen and (max-width:480px){
+  .main-box{
+    width: 100%;
+    padding: 40px;
+  }
+ }
+ .bg-box{
+  padding: 20px;
+  background-color: rgb(161, 163, 163);
+ }
+ .time {
+  display: flex;
+  justify-content: flex-end;
+}
+.post-container{
+  margin: 50px auto;
+  width: 50%;
+  border: solid #d3def1;
+  border-radius: 10px;
+  text-align: center;
+  background-color: rgb(161, 163, 163);
+}
+input[type="text"] {
+  width: 50%;
+  height: 40px;
+}
+ footer {
+    color: white;
+    height: 30px;
+    background-color: #000;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    justify-content: flex-end;
+  }
+  .btn-gradient-3d-orange {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+  }
+  .btn-gradient-3d-orange:active {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+  } 
+  .btn-gradient-3d-brown {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(45deg, #a57307 0%, #ff8b5f 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #3a1d0f;
+  }
+  .btn-gradient-3d-brown:active {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+  } 
+  .btn-square-soft {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: #f9a9ae;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+    font-weight: bold;
+    background: linear-gradient(#fed6e3 0%, #ffaaaa 100%);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.66);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+  }
+  
+  .btn-square-soft:active {
+    /*押したとき*/
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);/*沈むように*/
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    background-image: linear-gradient(#fed6e3 0%, #ffbcbc 100%);/*グラデーションを明るく*/
+  }
+  .btn-square-slant {
+    display: inline-block;
+    position: relative;
+    padding: 0.5em 1.4em;
+    text-decoration: none;
+    background: #aec5f7;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 5px #36528c;/*ボタン色より暗めに*/
+    border-right: solid 5px #5375bd;/*ボタン色より暗めに*/
+  }
+  
+  .btn-square-slant:before {  
+    content: " ";
+    position: absolute;
+    bottom: -5px;
+    left: -1px;
+    width: 0;
+    height: 0;
+    border-width: 0 6px 6px 0px;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: #FFF;
+  }
+  
+  .btn-square-slant:after {  
+    content: " ";
+    position: absolute;
+    top: -1px;
+    right: -5px;
+    width: 0;
+    height: 0;
+    border-width: 0px 6px 6px 0px;
+    border-style: solid;
+    border-color: #FFF;
+    border-bottom-color: transparent;
+  }
+  
+  .btn-square-slant:active {
+    /*ボタンを押したとき*/
+    border:none;
+    -webkit-transform: translate(6px,6px);
+    transform: translate(6px,6px);
+  }
+  
+  .btn-square-slant:active:after, .btn-square-slant:active:before {
+    content: none;/*ボタンを押すと線が消える*/
+  }

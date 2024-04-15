@@ -1,0 +1,47 @@
+<div class="post-container">  
+  <h1>Eigo</h1>
+  <h3>Tweet詳細</h3>
+  <div class="english">
+    <% @english.tags.each do |tag| %>
+      <span><%= tag.name %></span>
+    <% end %>
+    <p><%= @english.body %></p>
+    <p><%= @english.created_at %></p>
+      <% if user_signed_in? %>
+        <% if current_user.already_liked?(@english) %>
+          <%= link_to english_like_path(@english), method: :delete do %>
+            <i class="fas fa-heart"></i><%= @english.likes.count %>
+          <% end %>
+        <% else %>
+          <%= link_to english_likes_path(@english), method: :post do %>
+            <i class="fas fa-heart"></i><%= @english.likes.count %>
+          <% end %>
+        <% end %>
+      <% else %>
+      <i class="fas fa-heart"></i><%= @english.likes.count %>
+      <% end %>
+      <p class="btn-gradient-3d-brown"><%= link_to "編集する", edit_english_path(@english.id) %></p>
+  </div>
+  <div class="comment-wrapper">
+    <p>コメント一覧</p>
+    <% @comments.each do |c| %>
+      <div>
+        <%= c.user.email unless c.user.blank? %>
+        <br>
+        <%= c.content %>
+      </div>
+        <br>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= form_with(model: [@english, @comment], local: true) do |f| %>
+        <%= f.text_area :content %>
+        <%= button_tag type: "submit" do %>
+          <i class="far fa-comments"></i> コメントする
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <p class="btn-square-soft"><%= link_to "元の一覧に戻る", englishes_path %></p>
+</div>

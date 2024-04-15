@@ -1,0 +1,22 @@
+<div class="post-container">  
+   <h1>参考書</h1>
+   <h2>編集</h2>
+    <%= form_for @english do |f| %>
+        <div class='form-group'>
+          <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+              <div class='form-check'>
+                  <%= tag.label class: 'form-check-label' do %>
+                      <%= tag.check_box class: 'form-check-input' %>
+                      <%= tag.text %>
+                  <% end %>
+              </div>
+          <% end %>
+        </div>
+        <%= f.label :投稿欄 %>
+        <%= f.text_field :body, :size => 140 %>
+        <%= f.label :写真の貼り付け %>
+        <%= f.file_field :image %><br>
+        <%= f.submit "投稿する" %>
+    <% end %>
+    <p class="btn-square-soft"><%= link_to "元の一覧へ戻る", englishes_path %></p>
+</div>

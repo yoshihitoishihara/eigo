@@ -1,0 +1,22 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.user{
+    text-align: center;
+    padding-top: 70px;
+    margin-bottom: 300px; 
+    margin: 50px auto;
+    width: 50%;
+    border: solid #d3def1;
+    border-radius: 10px;
+    background-color: rgb(161, 163, 163);
+}
+.user-sub{
+    text-align: center;
+    padding-top: 70px;
+    margin-bottom: 300px; 
+    margin: auto;
+    width: 50%;
+    background-color: rgb(161, 163, 163);
+    overflow: scroll
+}

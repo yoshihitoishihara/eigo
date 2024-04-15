@@ -1,0 +1,71 @@
+<div class="all-video">  
+  <header>   
+    <div class="header-list">
+      <ul>     
+        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <li>  
+          <% if user_signed_in? %>
+            <%= link_to "マイページへ", user_path(current_user.id) %>
+          <% end %>
+        </li>
+        <li><%= link_to "参考書一覧へ", englishes_path %></li>
+      </ul>
+    </div>
+  </header>
+  <div class="tweets-container">
+    <h1>動画</h1>
+    <h3>投稿を検索</h3>
+    <%= form_tag({controller:"videos",action:"index"}, method: :get) do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag '検索' %>
+    <% end %>
+    <%= form_tag({controller:"videos",action:"index"}, method: :get) do %>
+      <% Check.all.each do |t| %>
+          <li><%= check_box :check_ids, t.name %><%= t.name %></li>
+      <% end %>
+      <%= submit_tag '検索' %>
+    <% end %>
+    <p class="btn-square-soft"><%= link_to "元の一覧へ戻る", videos_path %></p>
+    <p class="btn-square-slant"><%= link_to "新規投稿へ", new_video_path %></p>
+    <div class="tweet">
+          <tr>
+            <th colspan="3"></th>
+          </tr>
+        
+
+        
+          <% @videos.each do |video| %>
+              <div class="main-box">
+                <div class="bg-box">
+                  <div class="left-container">  
+                      <p><%= video.user.email %></p>
+                      <iframe width="200" height="150" src="https://www.youtube.com/embed/<%=video.youtube_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      <p><%= video.body %></p>
+                      <p class="time"><%= video.created_at %></p>
+                      </div>  
+                  <div class="right-container">
+                      <% if user_signed_in? %>
+                        <% if current_user.already_like2d?(video) %>
+                            <%= link_to video_like2_path(id: video.id, video_id: video.id), method: :delete do %>
+                              <i class="fas fa-heart"></i><%= video.like2s.count %>
+                            <% end %>
+                        <% else %>
+                            <%= link_to video_like2s_path(id: video.id, video_id: video.id), method: :post do %>
+                              <i class="fas fa-heart"></i><%= video.like2s.count %>
+                            <% end %>
+                        <% end %>
+                      <% else %>
+                        <i class="fas fa-heart"></i><%= video.like2s.count %>
+                      <% end %>
+                      </td>
+                      <p class="btn-gradient-3d-orange"><%= link_to '詳細', video %></p>
+                      <p class="btn-gradient-3d-brown"><%= link_to '編集する', edit_video_path(video.id) %></p>
+                      <p><%= button_to '削除する', video, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                  </div> 
+                </div> 
+              </div> 
+          <% end %>
+    </div>    
+        <br> 
+  </div>
+</div>

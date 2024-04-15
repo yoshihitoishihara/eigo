@@ -1,0 +1,46 @@
+<header>
+<div class="header-list">
+  <ul>
+    <li><%= link_to '参考書一覧へ',  englishes_path%></li>
+    <li><%= link_to "動画一覧へ", videos_path %></li>
+  </ul>
+</div>
+</header>
+<div class="user-sub">
+  <h1>マイページ</h1>
+  <p>名前 : <%= @user.name %></p>
+  <p>メールアドレス : <%= @user.email %></p>
+  <p>プロフィール : <%= @user.profile %></p>
+
+  <% if current_user.id == @user.id %>
+    <%= link_to "編集する", edit_user_registration_path %>
+  <% end %>
+
+  <h2>ユーザーの参考書の投稿一覧</h2>
+  <% @user.englishes.each do |t| %>
+    <p><%= t.user.name %></p>
+    <p><%= t.body %></p>
+  <% end %>
+
+  <!-- 以下はいいね機能を実装している場合-->
+  <h2>ユーザーがいいねした参考書の投稿一覧</h2>
+  <% @user.liked_englishes.each do |t| %>
+    <p><%= t.user.name %></p>
+    <p><%= t.body %></p>
+  <% end %>
+  <!-- ここまで-->
+
+  <h2>ユーザーの動画の投稿一覧</h2>
+  <% @user.videos.each do |video| %>
+    <p><%= video.user.name %><p>
+    <p><%= video.body %></p>
+  <% end %>
+
+  <!-- 以下はいいね機能を実装している場合-->
+  <h2>ユーザーがいいねした動画の投稿一覧</h2>
+  <% @user.like2d_videos.each do |video| %>
+    <p><%= video.user.name %><p>
+    <p><%= video.body %></p>
+  <% end %>
+  <!-- ここまで-->
+</div>
